@@ -12,17 +12,7 @@ struct WorkoutHorizontalListView: View {
     
     
     var body: some View {
-        ScrollView(.horizontal, showIndicators: false) {
-            LazyHStack(spacing: .Constants.standardPadding) {
-                Spacer()
-                    .frame(width:
-                            Constants.standardPadding)
-                ForEach(workoutList) { workout in
-                    NavigationLink(value: workout){
-                    
-                }
-            }
-        }
+        Text("Hello world")
     }
 }
 
