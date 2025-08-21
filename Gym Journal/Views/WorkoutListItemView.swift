@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct WorkoutListItemView: View {
-    let workout: String = "Yesterday"
+    let workout: Workout
+    let muscleGroup: MuscleGroup
     
     var body: some View {
-        Image("BackDay")
+        Image(muscleGroup.image)
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -29,7 +30,7 @@ struct WorkoutListItemView: View {
                     .cornerRadius(Constants.cornerRadius)
                 )
             .overlay(alignment: .bottom) {
-                Text(workout)
+                Text(workout.date)
                     .font(.title3).fontWeight(.semibold)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
@@ -39,6 +40,8 @@ struct WorkoutListItemView: View {
 }
 
 #Preview {
-    WorkoutListItemView()
+    let previewWorkout = Workout(id: 1, date: "Yesterday", primaryMuscleGroupId: 1)
+    let previewMuscleGroup = MuscleGroup(id: 1, name: "Back Day", image: "BackDay")
+    WorkoutListItemView(workout: previewWorkout, muscleGroup: previewMuscleGroup)
         .frame(width: 252.0, height: 180.0)
 }

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Workout: Identifiable {
+    var id: Int
+    var date: String
+    var primaryMuscleGroupId: Int
+}
