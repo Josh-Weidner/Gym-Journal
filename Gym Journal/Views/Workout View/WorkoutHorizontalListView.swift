@@ -9,10 +9,7 @@ import SwiftUI
 
 struct WorkoutHorizontalListView: View {
     let workoutList: [Workout]
-    var muscleGroups: [MuscleGroup] = [
-            MuscleGroup(id: 1, name: "Back Day", image: "BackDay"),
-            MuscleGroup(id: 2, name: "Chest Day", image: "ChestDay"),
-            MuscleGroup(id: 3, name: "Leg Day", image: "LegDay")]
+    var muscleGroups: [MuscleGroup] = MuscleGroup.exampleData
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {

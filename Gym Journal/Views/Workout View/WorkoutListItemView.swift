@@ -41,7 +41,7 @@ struct WorkoutListItemView: View {
 
 #Preview {
     let previewWorkout = Workout(id: 1, date: "Yesterday", primaryMuscleGroupId: 1)
-    let previewMuscleGroup = MuscleGroup(id: 1, name: "Back Day", image: "BackDay")
+    let previewMuscleGroup = MuscleGroup(id: 1, name: "Back Day")
     WorkoutListItemView(workout: previewWorkout, muscleGroup: previewMuscleGroup)
         .frame(width: 252.0, height: 180.0)
 }

@@ -9,10 +9,9 @@ import SwiftUI
 
 struct WorkoutFeaturedItemView: View {
     let workout: Workout
-    let muscleGroup: MuscleGroup
     
     var body: some View {
-        Image(decorative: muscleGroup.image)
+        Image(decorative: workout.muscleGroup.image)
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -32,7 +31,7 @@ struct WorkoutFeaturedItemView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .opacity(0.8)
-                    Text(muscleGroup.name)
+                    Text(workout.muscleGroup.name)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -48,7 +47,6 @@ struct WorkoutFeaturedItemView: View {
 
 #Preview {
     let previewWorkout: Workout = Workout(id: 1, date: "Today", primaryMuscleGroupId: 3)
-    let previewMuscleGroup: MuscleGroup = MuscleGroup(id: 3, name: "Leg Day", image: "LegDay")
-    WorkoutFeaturedItemView(workout: previewWorkout, muscleGroup: previewMuscleGroup)
+    WorkoutFeaturedItemView(workout: previewWorkout)
         .frame(height: 400.0)
 }

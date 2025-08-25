@@ -10,5 +10,8 @@ import Foundation
 struct MuscleGroup: Identifiable {
     var id: Int
     var name: String
-    var image: String
+    
+    var image: String {
+        return "\(id)"
+    }
 }

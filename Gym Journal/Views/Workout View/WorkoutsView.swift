@@ -15,13 +15,12 @@ struct WorkoutsView: View {
         Workout(id: 2, date: "Tuesday", primaryMuscleGroupId: 2),
         Workout(id: 3, date: "Monday", primaryMuscleGroupId: 3)]
     var featuredWorkout: Workout = Workout(id: 1, date: "Today", primaryMuscleGroupId: 3)
-    var featuredMuscleGroup: MuscleGroup = MuscleGroup(id: 3, name: "Leg Day", image: "LegDay")
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: Constants.standardPadding) {
 
-                WorkoutFeaturedItemView(workout: featuredWorkout, muscleGroup: featuredMuscleGroup)
+                WorkoutFeaturedItemView(workout: featuredWorkout)
                     .flexibleHeaderContent()
 
 

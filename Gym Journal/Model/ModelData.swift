@@ -13,4 +13,13 @@ import CoreLocation
 @Observable @MainActor
 class ModelData {
     var windowSize: CGSize = .zero
+    var muscleGroups: [MuscleGroup] = []
+    
+    init() {
+        loadMuscleGroups()
+    }
+    
+    func loadMuscleGroups() {
+        muscleGroups = MuscleGroup.exampleData
+    }
 }

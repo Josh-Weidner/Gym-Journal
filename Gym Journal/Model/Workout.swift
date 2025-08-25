@@ -11,4 +11,7 @@ struct Workout: Identifiable {
     var id: Int
     var date: String
     var primaryMuscleGroupId: Int
+    var muscleGroup: MuscleGroup {
+        MuscleGroup.exampleData.first(where: { $0.id == primaryMuscleGroupId }) ?? MuscleGroup.exampleData[0]
+    }
 }
