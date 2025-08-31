@@ -7,27 +7,28 @@
 
 import Foundation
 
+let backGroup = MuscleGroup(id: 1, name: "Back")
+let chestGroup = MuscleGroup(id: 2, name: "Chest")
+let legsGroup = MuscleGroup(id: 3, name: "Legs")
+
 extension Workout {
     @MainActor static let exampleData = [
         Workout(
-            id: 1,
             name: "Today",
-            date: "Today",
-            primaryMuscleGroupId: 3
+            date: Date(),
+            muscleGroup: backGroup
         ),
         
         Workout(
-            id: 2,
             name: "Yesterday",
-            date: "Yesterday",
-            primaryMuscleGroupId: 2
+            date: Date(),
+            muscleGroup: chestGroup
         ),
         
         Workout(
-            id: 3,
             name: "Tuesday",
-            date: "Tuesday",
-            primaryMuscleGroupId: 1
+            date: Date(),
+            muscleGroup: legsGroup
         )
     ]
 }

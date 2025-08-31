@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WorkoutFeaturedItemView: View {
-    @Environment(ModelData.self) private var modelData
     let workout: Workout
     
     var body: some View {
-        Image(decorative: workout.muscleGroup.image)
+        Image(decorative: workout.muscleGroup.name)
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -47,8 +47,9 @@ struct WorkoutFeaturedItemView: View {
 }
 
 #Preview {
-    let previewWorkout: Workout = Workout(id: 1, name: "Today", date: "Today", primaryMuscleGroupId: 3)
+    let previewMuscleGroup = MuscleGroup(id: 1, name: "Back")
+    let previewWorkout: Workout = Workout(name: "Today", date: Date(), muscleGroup: previewMuscleGroup)
     WorkoutFeaturedItemView(workout: previewWorkout)
-        .environment(ModelData())
+        .modelContainer(for: Workout.self, inMemory: true)
         .frame(height: 400.0)
 }

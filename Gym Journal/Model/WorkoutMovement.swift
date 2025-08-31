@@ -18,9 +18,6 @@ struct WorkoutMovement {
     
     var workoutId: Int
     
-    var workout: Workout {
-        Workout.exampleData.first(where: { $0.id == workoutId})!
-    }
     
     var sets: Int
     var repitions: Int

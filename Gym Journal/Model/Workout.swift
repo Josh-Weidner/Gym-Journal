@@ -6,13 +6,19 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Workout: Identifiable, Hashable {
-    var id: Int
+@Model
+final class Workout {
     var name: String
-    var date: String
-    var primaryMuscleGroupId: Int
-    var muscleGroup: MuscleGroup {
-        MuscleGroup.exampleData.first(where: { $0.id == primaryMuscleGroupId }) ?? MuscleGroup.exampleData[0]
+    var date: Date
+    
+    @Relationship
+    var muscleGroup: MuscleGroup
+    
+    init(name: String, date: Date, muscleGroup: MuscleGroup) {
+        self.name = name
+        self.date = date
+        self.muscleGroup = muscleGroup
     }
 }

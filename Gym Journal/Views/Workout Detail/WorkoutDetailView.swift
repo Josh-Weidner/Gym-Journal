@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WorkoutDetailView: View {
-    @Environment(ModelData.self) private var modelData
-    
     let workout: Workout
     
     var body: some View {
@@ -18,9 +17,16 @@ struct WorkoutDetailView: View {
 }
 
 #Preview {
-    @Previewable @State var modelData = ModelData()
-    let previewWorkout: Workout = Workout(id: 1, name: "Today", date: "Today", primaryMuscleGroupId: 3)
+    let firstMuscleGroup = MuscleGroup(id: 1, name: "Back")
     
-    WorkoutDetailView(workout: previewWorkout)
-        .environment(ModelData())
+    // Create a sample Workout directly in the preview
+    let sampleWorkout = Workout(
+        name: "Chest Day",
+        date: Date(),
+        muscleGroup: firstMuscleGroup
+    )
+    
+    WorkoutDetailView(workout: sampleWorkout)
+        .modelContainer(for: Workout.self, inMemory: true)
 }
+

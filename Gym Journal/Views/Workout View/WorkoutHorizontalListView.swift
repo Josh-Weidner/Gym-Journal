@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WorkoutHorizontalListView: View {
-    @Environment(ModelData.self) private var modelData
+    @Environment(\.modelContext) private var modelContext
+    @Query private var workouts: [Workout]
     
     let workoutList: [Workout]
     var muscleGroups: [MuscleGroup] = MuscleGroup.exampleData
@@ -21,22 +23,22 @@ struct WorkoutHorizontalListView: View {
                         .frame(width:
                                 Constants.standardPadding)
                     ForEach(workoutList) {workout in
-                        if let muscleGroup = muscleGroups.first(where: {$0.id == workout.primaryMuscleGroupId}) {
-                            WorkoutListItemView(workout: workout, muscleGroup: muscleGroup)
-                                .aspectRatio(Constants.landmarkListItemAspectRatio, contentMode: .fill)
-                        }
+                        WorkoutListItemView(workout: workout)
+                            .aspectRatio(Constants.landmarkListItemAspectRatio, contentMode: .fill)
                     }
-                }
-            
-        }
+                }            
+            }
         }
     }
 }
 
 #Preview {
-    let firstWorkout: Workout = Workout(id: 1, name: "Yesterday", date: "Yesterday", primaryMuscleGroupId: 1)
-    let secondWorkout: Workout = Workout(id: 2, name: "Tuesday", date: "Tuesday", primaryMuscleGroupId: 2)
-    let thirdWorkout: Workout = Workout(id: 3, name: "Monday", date: "Monday", primaryMuscleGroupId: 3)
+    let firstMuscleGroup = MuscleGroup(id: 1, name: "Back")
+    let secondMuscleGroup = MuscleGroup(id: 2, name: "Chest")
+    let thirdMuscleGroup = MuscleGroup(id: 3, name: "Legs")
+    let firstWorkout: Workout = Workout(name: "Yesterday", date: Date(), muscleGroup: firstMuscleGroup)
+    let secondWorkout: Workout = Workout(name: "Tuesday", date: Date(), muscleGroup: secondMuscleGroup)
+    let thirdWorkout: Workout = Workout(name: "Monday", date: Date(), muscleGroup: thirdMuscleGroup)
     let workoutList: [Workout] = [firstWorkout, secondWorkout, thirdWorkout]
     WorkoutHorizontalListView(workoutList: workoutList)
         .environment(ModelData())

@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import SwiftData
 
-struct MuscleGroup: Identifiable {
+@Model
+final class MuscleGroup: Identifiable {
     var id: Int
     var name: String
     
-    var image: String {
-        return "\(id)"
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
     }
 }
