@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Workout: Identifiable {
+struct Workout: Identifiable, Hashable {
     var id: Int
+    var name: String
     var date: String
     var primaryMuscleGroupId: Int
     var muscleGroup: MuscleGroup {

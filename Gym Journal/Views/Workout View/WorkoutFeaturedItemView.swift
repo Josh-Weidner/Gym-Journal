@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WorkoutFeaturedItemView: View {
+    @Environment(ModelData.self) private var modelData
     let workout: Workout
     
     var body: some View {
@@ -46,7 +47,8 @@ struct WorkoutFeaturedItemView: View {
 }
 
 #Preview {
-    let previewWorkout: Workout = Workout(id: 1, date: "Today", primaryMuscleGroupId: 3)
+    let previewWorkout: Workout = Workout(id: 1, name: "Today", date: "Today", primaryMuscleGroupId: 3)
     WorkoutFeaturedItemView(workout: previewWorkout)
+        .environment(ModelData())
         .frame(height: 400.0)
 }

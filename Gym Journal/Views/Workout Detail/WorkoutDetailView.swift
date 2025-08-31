@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct WorkoutDetailView: View {
+    @Environment(ModelData.self) private var modelData
+    
+    let workout: Workout
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(workout.name)
     }
 }
 
 #Preview {
-    WorkoutDetailView()
+    @Previewable @State var modelData = ModelData()
+    let previewWorkout: Workout = Workout(id: 1, name: "Today", date: "Today", primaryMuscleGroupId: 3)
+    
+    WorkoutDetailView(workout: previewWorkout)
+        .environment(ModelData())
 }

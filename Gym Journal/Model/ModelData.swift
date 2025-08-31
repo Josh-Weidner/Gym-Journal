@@ -14,12 +14,18 @@ import CoreLocation
 class ModelData {
     var windowSize: CGSize = .zero
     var muscleGroups: [MuscleGroup] = []
+    var workouts: [Workout] = []
     
     init() {
         loadMuscleGroups()
+        loadWorkouts()
     }
     
     func loadMuscleGroups() {
         muscleGroups = MuscleGroup.exampleData
+    }
+    
+    func loadWorkouts() {
+        workouts = Workout.exampleData
     }
 }
