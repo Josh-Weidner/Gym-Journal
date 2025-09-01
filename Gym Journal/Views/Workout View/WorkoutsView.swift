@@ -6,35 +6,50 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WorkoutsView: View {
     @Environment(ModelData.self) private var modelData
+    @Environment(\.modelContext) private var modelContext
+    @Query private var workouts: [Workout]
+    
+    @State private var isPresentingAddWorkout = false
     
     var body: some View {
-        NavigationStack {            
+        NavigationStack {
             ScrollView(showsIndicators: false) {
                 LazyVStack(alignment: .leading, spacing: Constants.standardPadding) {
-
-                    WorkoutFeaturedItemView(workout: modelData.workouts.first!)
-                        .flexibleHeaderContent()
-
-
+                    
+                    if let firstWorkout = modelData.workouts.first {
+                        WorkoutFeaturedItemView(workout: firstWorkout)
+                            .flexibleHeaderContent()
+                            .environment(modelData)
+                            .modelContainer(for: Workout.self)
+                    }
+                    
                     Group {
                         CategoryTitleView(title: "Previous Workouts")
-                        WorkoutHorizontalListView(workoutList: modelData.workouts)
-                                .containerRelativeFrame(.vertical) { height, axis in
-                                    let proposedHeight = height * Constants.landmarkListPercentOfHeight
-                                    if proposedHeight > Constants.landmarkListMinimumHeight {
-                                        return proposedHeight
-                                    }
-                                    return Constants.landmarkListMinimumHeight
-                                }
+                        WorkoutHorizontalListView(workoutList: workouts)
+                            .containerRelativeFrame(.vertical) { height, _ in
+                                let proposedHeight = height * Constants.landmarkListPercentOfHeight
+                                return max(proposedHeight, Constants.landmarkListMinimumHeight)
+                            }
                     }
                 }
             }
             .flexibleHeaderScrollView()
             .ignoresSafeArea(.keyboard)
             .ignoresSafeArea(edges: .top)
+            .toolbar {
+                ToolbarItem {
+                    Button(action: { isPresentingAddWorkout = true }) {
+                        Label("Add Item", systemImage: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $isPresentingAddWorkout) {
+                AddWorkoutView(isPresented: $isPresentingAddWorkout)
+            }
         }
     }
 }
@@ -56,6 +71,7 @@ private struct CategoryTitleView: View {
     @Previewable @State var modelData = ModelData()
     
     WorkoutsView()
+        .modelContainer(for: Workout.self, inMemory: true)
         .environment(modelData)
         .onGeometryChange(for: CGSize.self) { geometry in
             geometry.size

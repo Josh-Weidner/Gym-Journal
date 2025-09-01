@@ -10,53 +10,26 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(ModelData.self) private var modelData
     @Query private var workouts: [Workout]
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                
-                ForEach(workouts) { workout in
-                    NavigationLink {
-                        Text("Item at \(workout.date, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(workout.date, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        WorkoutsView()
+            .environment(modelData)
+            .modelContainer(for: Workout.self, inMemory: true)
+            .onGeometryChange(for: CGSize.self) { geometry in
+                geometry.size
+            } action: {
+                modelData.windowSize = $0
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newWorkout = Workout(name: "Today's workout", date: Date(), muscleGroup: MuscleGroup(id: 1, name: "Chest"))
-            modelContext.insert(newWorkout)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(workouts[index])
-            }
-        }
-    }
+        
 }
 
 #Preview {
+    @Previewable @State var modelData = ModelData()
+    
     ContentView()
+        .environment(modelData)
         .modelContainer(for: Workout.self, inMemory: true)
 }
