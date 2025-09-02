@@ -7,24 +7,28 @@
 
 import Foundation
 
+let backGroup = MuscleGroup(id: 1, name: "Back")
+let chestGroup = MuscleGroup(id: 2, name: "Chest")
+let legsGroup = MuscleGroup(id: 3, name: "Legs")
+
 extension Movement {
     @MainActor static let exampleData = [
         Movement(
             id: 1,
             name: "Bench Press",
-            muscleGroupId: 1
+            muscleGroup: backGroup
         ),
         
         Movement(
             id: 2,
             name: "Bar Bell Row",
-            muscleGroupId: 2
+            muscleGroup: backGroup
         ),
         
         Movement(
             id: 3,
             name: "Squat",
-            muscleGroupId: 3
+            muscleGroup: backGroup
         )
     ]
 }

@@ -32,7 +32,7 @@ struct WorkoutListItemView: View {
                             .cornerRadius(Constants.cornerRadius)
                         )
                     .overlay(alignment: .bottom) {
-                        Text(workout.date.formatted(.dateTime.month().day().year()))
+                        Text(workout.date.relativeDescription())
                             .font(.title3).fontWeight(.semibold)
                             .multilineTextAlignment(.center)
                             .foregroundColor(.white)
@@ -46,7 +46,7 @@ struct WorkoutListItemView: View {
 
 #Preview {
     let previewMuscleGroup = MuscleGroup(id: 1, name: "Back")
-    let previewWorkout = Workout(name:"Yesterday", date: Date(), muscleGroup: previewMuscleGroup)
+    let previewWorkout = Workout(name:"Yesterday", date: Calendar.current.date(byAdding: .day, value: -1, to: Date())!, muscleGroup: previewMuscleGroup)
     WorkoutListItemView(workout: previewWorkout)
         .modelContainer(for: Workout.self, inMemory: true)
         .frame(width: 252.0, height: 180.0)

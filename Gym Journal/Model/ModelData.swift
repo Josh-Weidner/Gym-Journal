@@ -16,10 +16,12 @@ class ModelData {
     var windowSize: CGSize = .zero
     var muscleGroups: [MuscleGroup] = []
     var workouts: [Workout] = []
+    var movements: [Movement] = []
     
     init() {
         loadMuscleGroups()
         loadWorkouts()
+        loadMovements()
     }
     
     func loadMuscleGroups() {
@@ -28,5 +30,9 @@ class ModelData {
     
     func loadWorkouts() {
         workouts = Workout.exampleData
+    }
+    
+    func loadMovements() {
+        movements = Movement.exampleData
     }
 }

@@ -17,18 +17,43 @@ struct AddWorkoutView: View {
     @State private var selectedMuscleGroup: MuscleGroup = MuscleGroup.exampleData.first!
     @State private var date: Date = Date()
     
+    @State private var selectedMovement: Movement = Movement.exampleData.first!
+    @State private var selectedWeight: Double = 50
+    @State private var selectedReps: Int = 8
+    @State private var selectedSets: Int = 3
+    
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Workout Name", text: $name)
-                Picker("Muscle Group", selection: $selectedMuscleGroup) {
-                    ForEach(modelData.muscleGroups, id: \.id) { group in
-                        Text(group.name).tag(group)
+                Section() {
+                    
+                    TextField("Workout Name", text: $name)
+                    Picker("Muscle Group", selection: $selectedMuscleGroup) {
+                        ForEach(modelData.muscleGroups, id: \.id) { group in
+                            Text(group.name).tag(group)
+                        }
                     }
-                }
-                .pickerStyle(.menu)
+                    .pickerStyle(.menu)
 
-                DatePicker("Date", selection: $date, displayedComponents: .date)
+                    DatePicker("Date", selection: $date, displayedComponents: .date)
+                }
+                
+                Section(){
+                    Picker("Movement", selection: $selectedMovement) {
+                        ForEach(modelData.movements, id: \.id) { group in
+                            Text(group.name).tag(group)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    
+                    Picker("Weight", selection: $selectedWeight) {
+                        ForEach(0..<101) { i in
+                            let value = Double(i) * 2.5
+                            Text("\(value, specifier: "%.1f") lbs").tag(value)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
             }
             .navigationTitle("New Workout")
             .toolbar {
@@ -42,7 +67,7 @@ struct AddWorkoutView: View {
                     Button(action: {
                         let newWorkout = Workout(
                             name: name,
-                            date: Date(),
+                            date: date,
                             muscleGroup: selectedMuscleGroup,
                         )
                         modelContext.insert(newWorkout)

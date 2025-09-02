@@ -6,12 +6,19 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Movement: Identifiable {
+@Model
+final class Movement: Identifiable {
     var id: Int
     var name: String
-    var muscleGroupId: Int
-    var muscleGroup: MuscleGroup {
-        MuscleGroup.exampleData.first(where: { $0.id == muscleGroupId })!
+    
+    @Relationship
+    var muscleGroup: MuscleGroup
+    
+    init(id: Int, name: String, muscleGroup: MuscleGroup) {
+        self.id = id
+        self.name = name
+        self.muscleGroup = muscleGroup
     }
 }

@@ -7,10 +7,6 @@
 
 import Foundation
 
-let backGroup = MuscleGroup(id: 1, name: "Back")
-let chestGroup = MuscleGroup(id: 2, name: "Chest")
-let legsGroup = MuscleGroup(id: 3, name: "Legs")
-
 extension Workout {
     @MainActor static let exampleData = [
         Workout(

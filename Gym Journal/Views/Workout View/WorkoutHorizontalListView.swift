@@ -36,9 +36,9 @@ struct WorkoutHorizontalListView: View {
     let firstMuscleGroup = MuscleGroup(id: 1, name: "Back")
     let secondMuscleGroup = MuscleGroup(id: 2, name: "Chest")
     let thirdMuscleGroup = MuscleGroup(id: 3, name: "Legs")
-    let firstWorkout: Workout = Workout(name: "Yesterday", date: Date(), muscleGroup: firstMuscleGroup)
-    let secondWorkout: Workout = Workout(name: "Tuesday", date: Date(), muscleGroup: secondMuscleGroup)
-    let thirdWorkout: Workout = Workout(name: "Monday", date: Date(), muscleGroup: thirdMuscleGroup)
+    let firstWorkout: Workout = Workout(name: "Yesterday", date: Calendar.current.date(byAdding: .day, value: -1, to: Date())!, muscleGroup: firstMuscleGroup)
+    let secondWorkout: Workout = Workout(name: "Tuesday", date: Calendar.current.date(byAdding: .day, value: -2, to: Date())!, muscleGroup: secondMuscleGroup)
+    let thirdWorkout: Workout = Workout(name: "Monday", date: Calendar.current.date(byAdding: .day, value: -3, to: Date())!, muscleGroup: thirdMuscleGroup)
     let workoutList: [Workout] = [firstWorkout, secondWorkout, thirdWorkout]
     WorkoutHorizontalListView(workoutList: workoutList)
         .environment(ModelData())
